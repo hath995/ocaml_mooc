@@ -8,31 +8,18 @@ Synopsis:     Some short description
 Authors:      hathlesstroubles@gmail.com
 License:      BSD-3-clause
 Plugins:      META (0.4), DevFiles (0.4)
-AlphaFeatures: ocamlbuild_more_args
 
 Description:
   Some cool description
 
-# This is a comment and this below creates an binary program    
-Executable phonedb
+Library phonedb
   Path: src
-  BuildTools:ocamlbuild
-  install: true
-  MainIs: phonedb.ml
-  CompiledObject: native
+  BuildTools: ocamlbuild
+  Modules: Phonedb
 
 Executable "test_phonedb"
   Path: test
   BuildTools:ocamlbuild
-  install: false
-  Build$: flag(tests)
   MainIs: phonedb_test.ml
   CompiledObject: native
-  BuildDepends: oUnit
-
-Test "test_phonedb"
-  Run$: flag(tests)
-  TestTools: test_phonedb
-  Command: $test_phonedb
-  WorkingDirectory: test
-  
+  BuildDepends: phonedb, oUnit
